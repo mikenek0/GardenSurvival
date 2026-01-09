@@ -3,12 +3,12 @@ using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using WMPLib;
+//using WMPLib;
 
 public partial class MainMenuForm : Form
 {
-   private WindowsMediaPlayer _buttonSound;
-   private WindowsMediaPlayer _menuMusic;
+   //private WindowsMediaPlayer _buttonSound;
+   //private WindowsMediaPlayer _menuMusic;
 
    public bool ShouldStartGame { get; private set; } = false;
    public MainMenuForm()
@@ -18,16 +18,16 @@ public partial class MainMenuForm : Form
       this.BackColor = Color.Black;
       this.TopMost = true;
 
-      _buttonSound = new WindowsMediaPlayer();
-      _buttonSound.URL = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "button.mp3");
-      _buttonSound.settings.volume = 40;
-      _buttonSound.controls.stop();
-      _menuMusic = new WindowsMediaPlayer();
-      _menuMusic.URL = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "main_menu.mp3");
-      _menuMusic.settings.volume = 60;
-      _menuMusic.settings.setMode("loop", true); 
+      //_buttonSound = new WindowsMediaPlayer();
+      //_buttonSound.URL = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "button.mp3");
+      //_buttonSound.settings.volume = 40;
+      //_buttonSound.controls.stop();
+      //_menuMusic = new WindowsMediaPlayer();
+      //_menuMusic.URL = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "main_menu.mp3");
+      //_menuMusic.settings.volume = 60;
+      //_menuMusic.settings.setMode("loop", true); 
 
-      _menuMusic.controls.play();
+      //_menuMusic.controls.play();
    }
 
    private void MainMenuForm_Load(object sender, EventArgs e)
@@ -53,9 +53,9 @@ public partial class MainMenuForm : Form
 
    private void StartGameButton_Click(object sender, EventArgs e)
    {
-      _buttonSound.controls.stop();
-      _buttonSound.controls.play();
-      _menuMusic.controls.stop();
+      //_buttonSound.controls.stop();
+      //_buttonSound.controls.play();
+      //_menuMusic.controls.stop();
 
       ShouldStartGame = true;
       this.DialogResult = DialogResult.OK;
@@ -64,9 +64,9 @@ public partial class MainMenuForm : Form
 
    private void ExitButton_Click(object sender, EventArgs e)
    {
-      _buttonSound.controls.stop();
-      _buttonSound.controls.play();
-      _menuMusic.controls.stop();
+      //_buttonSound.controls.stop();
+      //_buttonSound.controls.play();
+      //_menuMusic.controls.stop();
 
       this.DialogResult = DialogResult.Cancel;
       this.Close();
@@ -75,8 +75,8 @@ public partial class MainMenuForm : Form
    protected override void OnFormClosing(FormClosingEventArgs e)
    {
       base.OnFormClosing(e);
-      _menuMusic.controls.stop();
-      _menuMusic.close();
+      //_menuMusic.controls.stop();
+      //_menuMusic.close();
    }
    
 }

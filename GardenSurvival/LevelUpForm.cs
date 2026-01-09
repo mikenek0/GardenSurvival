@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-using WMPLib;
+//using WMPLib;
 
 public partial class LevelUpForm : Form
 {
    public string SelectedOption { get; private set; } = "continue";
-   private WindowsMediaPlayer _buttonSound;
+   //private WindowsMediaPlayer _buttonSound;
    public LevelUpForm(int newLevel, List<string> options)
    {
       InitializeComponent();
@@ -21,9 +21,9 @@ public partial class LevelUpForm : Form
       this.StartPosition = FormStartPosition.CenterScreen;
       this.ControlBox = false;
       this.Text = "";
-      _buttonSound = new WindowsMediaPlayer();
-      _buttonSound.URL = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "button.mp3");
-      _buttonSound.settings.volume = 40;
+      //_buttonSound = new WindowsMediaPlayer();
+      //_buttonSound.URL = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "button.mp3");
+      //_buttonSound.settings.volume = 40;
       int yPos = 100;
       foreach (var option in options)
       {
@@ -41,8 +41,8 @@ public partial class LevelUpForm : Form
          var opt = option; 
          button.Click += (s, e) =>
          {
-            _buttonSound.controls.stop();
-            _buttonSound.controls.play();
+            //_buttonSound.controls.stop();
+            //_buttonSound.controls.play();
             SelectedOption = opt;
             this.DialogResult = DialogResult.OK;
             this.Close();

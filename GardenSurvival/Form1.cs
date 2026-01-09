@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Media;
-using System.Threading.Tasks;
-using WMPLib; 
+
+//using System.IO;
+//using System.Media;
+//using System.Threading.Tasks;
+//using WMPLib; 
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
@@ -96,15 +98,15 @@ namespace GardenSurvival
       private Panel _expBarBackground; 
       private Panel _expBarFill;      
       private int _enemiesKilled = 0; 
-      private WindowsMediaPlayer _damageSound;
-      private WindowsMediaPlayer _deathSound;
-      private WindowsMediaPlayer _enemyDeathSound;
-      private WindowsMediaPlayer _levelUpSound;
-      private WindowsMediaPlayer _buttonSound;
-      private WindowsMediaPlayer _musicPlayer;
-      private string[] _gameTracks = { "Game1.mp3", "Game2.mp3", "Game3.mp3" };
-      private Random _musicRandom = new Random();
-      private bool _deathSoundPlayed = false;
+      //private WindowsMediaPlayer _damageSound;
+      //private WindowsMediaPlayer _deathSound;
+      //private WindowsMediaPlayer _enemyDeathSound;
+      //private WindowsMediaPlayer _levelUpSound;
+      //private WindowsMediaPlayer _buttonSound;
+      //private WindowsMediaPlayer _musicPlayer;
+      //private string[] _gameTracks = { "Game1.mp3", "Game2.mp3", "Game3.mp3" };
+      //private Random _musicRandom = new Random();
+      //private bool _deathSoundPlayed = false;
       public class ExpOrb
       {
          public float X { get; set; }
@@ -152,7 +154,7 @@ namespace GardenSurvival
          _keyStates[Keys.Down] = false;
          _keyStates[Keys.Escape] = false;
          _keyStates[Keys.R] = false;
-         
+
          if (!InitOpenGL(this.Handle))
          {
             MessageBox.Show("Ошибка инициализации OpenGL!");
@@ -177,68 +179,68 @@ namespace GardenSurvival
          _prevPlayerX = _player.X;
          _prevPlayerY = _player.Y;
          InitTileMap(50, 50);
-         _damageSound = new WindowsMediaPlayer();
-         _damageSound.URL = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "player_damage.mp3");
-         _damageSound.settings.volume = 70;
+         //_damageSound = new WindowsMediaPlayer();
+         //_damageSound.URL = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "player_damage.mp3");
+         //_damageSound.settings.volume = 70;
 
-         _deathSound = new WindowsMediaPlayer();
-         _deathSound.URL = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "player_death.mp3");
-         _deathSound.settings.volume = 70;
+         //_deathSound = new WindowsMediaPlayer();
+         //_deathSound.URL = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "player_death.mp3");
+         //_deathSound.settings.volume = 70;
 
-         _enemyDeathSound = new WindowsMediaPlayer();
-         _enemyDeathSound.URL = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "enemy_death.mp3");
-         _enemyDeathSound.settings.volume = 70;
+         //_enemyDeathSound = new WindowsMediaPlayer();
+         //_enemyDeathSound.URL = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "enemy_death.mp3");
+         //_enemyDeathSound.settings.volume = 70;
 
-         _levelUpSound = new WindowsMediaPlayer();
-         _levelUpSound.URL = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lvl_up.mp3");
-         _levelUpSound.settings.volume = 70;
+         //_levelUpSound = new WindowsMediaPlayer();
+         //_levelUpSound.URL = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lvl_up.mp3");
+         //_levelUpSound.settings.volume = 70;
 
-         _buttonSound = new WindowsMediaPlayer();
-         _buttonSound.URL = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "button.mp3");
-         _buttonSound.settings.volume = 40;
+         //_buttonSound = new WindowsMediaPlayer();
+         //_buttonSound.URL = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "button.mp3");
+         //_buttonSound.settings.volume = 40;
 
-         _musicPlayer = new WindowsMediaPlayer();
-         _musicPlayer.settings.volume = 45;
-         _musicPlayer.settings.setMode("loop", false); 
-         _musicPlayer.PlayStateChange += MusicPlayer_PlayStateChange;
+         //_musicPlayer = new WindowsMediaPlayer();
+         //_musicPlayer.settings.volume = 45;
+         //_musicPlayer.settings.setMode("loop", false); 
+         //_musicPlayer.PlayStateChange += MusicPlayer_PlayStateChange;
 
-         PlayRandomGameTrack();
+         //PlayRandomGameTrack();
       }
-      private void PlayRandomGameTrack()
-      {
-         _musicPlayer.controls.stop();
+      //private void PlayRandomGameTrack()
+      //{
+      //   _musicPlayer.controls.stop();
 
-         System.Threading.Tasks.Task.Delay(50).ContinueWith(_ =>
-         {
-            int index = _musicRandom.Next(_gameTracks.Length);
-            string trackPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _gameTracks[index]);
+      //   System.Threading.Tasks.Task.Delay(50).ContinueWith(_ =>
+      //   {
+      //      int index = _musicRandom.Next(_gameTracks.Length);
+      //      string trackPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _gameTracks[index]);
 
-            if (!File.Exists(trackPath))
-            {
-               Console.WriteLine($"Файл не найден: {trackPath}");
-               return;
-            }
+      //      if (!File.Exists(trackPath))
+      //      {
+      //         Console.WriteLine($"Файл не найден: {trackPath}");
+      //         return;
+      //      }
 
-            _musicPlayer.URL = trackPath;
-            _musicPlayer.controls.play();
-         }, TaskScheduler.FromCurrentSynchronizationContext());
-      }
+      //      _musicPlayer.URL = trackPath;
+      //      _musicPlayer.controls.play();
+      //   }, TaskScheduler.FromCurrentSynchronizationContext());
+      //}
 
-      private void MusicPlayer_PlayStateChange(int NewState)
-      {
-         if (NewState == (int)WMPPlayState.wmppsMediaEnded)
-            PlayRandomGameTrack(); 
-      }
+      //private void MusicPlayer_PlayStateChange(int NewState)
+      //{
+      //   if (NewState == (int)WMPPlayState.wmppsMediaEnded)
+      //      PlayRandomGameTrack(); 
+      //}
       private void ShowStartingWeaponSelection()
       {
          _gameTimer.Stop();
          _isPaused = true;
 
-         _musicPlayer.controls.pause();
-         _damageSound.controls.stop();
-         _deathSound.controls.stop();
-         _enemyDeathSound.controls.stop();
-         _levelUpSound.controls.stop();
+         //_musicPlayer.controls.pause();
+         //_damageSound.controls.stop();
+         //_deathSound.controls.stop();
+         //_enemyDeathSound.controls.stop();
+         //_levelUpSound.controls.stop();
 
          var originalBackColor = this.BackColor;
          this.BackColor = Color.Black;
@@ -260,7 +262,7 @@ namespace GardenSurvival
             }
          }
 
-         _musicPlayer.controls.play();
+         //_musicPlayer.controls.play();
 
          this.BackColor = originalBackColor;
          _healthBarBackground.Visible = true;
@@ -471,20 +473,20 @@ namespace GardenSurvival
 
                if (_player.TakeDamage(20 * deltaTime))
                {
-                  if (!_deathSoundPlayed)
-                  {
-                     _deathSound.controls.stop();
-                     _deathSound.controls.play();
-                     _deathSoundPlayed = true;
-                  }
+                  //if (!_deathSoundPlayed)
+                  //{
+                  //   _deathSound.controls.stop();
+                  //   _deathSound.controls.play();
+                  //   _deathSoundPlayed = true;
+                  //}
 
                   HandleGameOver();
                }
-               else if (wasAlive && _player.IsDamaged)
-               {
-                  _damageSound.controls.stop();
-                  _damageSound.controls.play();
-               }
+               //else if (wasAlive && _player.IsDamaged)
+               //{
+               //   _damageSound.controls.stop();
+               //   _damageSound.controls.play();
+               //}
             }
             enemy.CollideWithPlayer(_player.X, _player.Y, _player.HitboxRadius, deltaTime);
             if (enemy.Health <= 0)
@@ -492,8 +494,8 @@ namespace GardenSurvival
                enemy.Active = false;
                _enemiesKilled++;
 
-               _enemyDeathSound.controls.stop();
-               _enemyDeathSound.controls.play();
+               //_enemyDeathSound.controls.stop();
+               //_enemyDeathSound.controls.play();
 
                _expOrbs.Add(new ExpOrb
                {
@@ -622,8 +624,8 @@ namespace GardenSurvival
          if (options.Count == 0)
             options.Add("Продолжить");
 
-         _levelUpSound.controls.stop();
-         _levelUpSound.controls.play();
+         //_levelUpSound.controls.stop();
+         //_levelUpSound.controls.play();
          var levelUpForm = new LevelUpForm(level, options);
          levelUpForm.ShowDialog(this);
 
@@ -642,7 +644,7 @@ namespace GardenSurvival
       }
       private void HandleGameOver()
       {
-         _musicPlayer.controls.stop();
+         //_musicPlayer.controls.stop();
          Player.SaveRecord(_player.Level);
 
          _isPaused = true;
@@ -667,7 +669,7 @@ namespace GardenSurvival
         
          if (gameOverForm.ShouldRestart)
          {
-            _musicPlayer.controls.stop();
+            //_musicPlayer.controls.stop();
             _gameTimer.Stop();
             ResetGame();
 
@@ -677,7 +679,7 @@ namespace GardenSurvival
          }
          else if (gameOverForm.MainMenu)
          {
-            _musicPlayer.controls.stop();
+            //_musicPlayer.controls.stop();
             this.DialogResult = DialogResult.Abort;
             this.Close();
          }
@@ -692,8 +694,8 @@ namespace GardenSurvival
       private void ResetGame()
       {
          _gameStartTime = DateTime.Now;
-         _deathSoundPlayed = false;
-         _musicPlayer.controls.stop();
+         //_deathSoundPlayed = false;
+         //_musicPlayer.controls.stop();
          _waveTimer = WaveInterval;
          _currentWave = 1;
          _enemiesKilled = 0;
@@ -743,7 +745,7 @@ namespace GardenSurvival
             }
             else if (pauseForm.MainMenu)
             {
-               _musicPlayer.controls.stop();
+               //_musicPlayer.controls.stop();
                this.DialogResult = DialogResult.Abort;
                this.Close();
             }

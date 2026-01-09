@@ -2,6 +2,7 @@
 #include "pch.h"
 #include "render.h"
 #include <windows.h>
+#include <string>
 #include <math.h>
 #include <gl/GL.h>
 #include <gl/GLU.h>
@@ -11,7 +12,7 @@
 
 #pragma comment(lib, "opengl32.lib")
 #pragma comment(lib, "glu32.lib")
-
+using namespace std;
 static HDC  g_hDC = nullptr;
 static HGLRC g_hRC = nullptr;
 static GLuint g_playerTexture = 0;
@@ -151,10 +152,11 @@ bool InitOpenGL(void* hwnd) {
     glDisable(GL_DEPTH_TEST);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-    g_playerTexture = LoadTexture("player.png");
-    g_enemyTexture = LoadTexture("enemy.png");
-    g_orbTexture = LoadTexture("orb.png");
+    
+    g_tileTexture = LoadTexture("pic\\Tale.png");
+    g_playerTexture = LoadTexture("pic\\player.png");
+    g_enemyTexture = LoadTexture("pic\\enemy.png");
+    g_orbTexture = LoadTexture("pic\\orb.png");
     SetupFont();
     return true;
 }
@@ -286,7 +288,7 @@ void InitTileMap(int width, int height)
         g_tileMap[ry * width + rx] = id;
     }
 
-    g_tileTexture = LoadTexture("Tale.png");
+   
 }
 
 static void DrawTileMap(float offsetX, float offsetY, int screenWidth, int screenHeight)
